@@ -1,0 +1,26 @@
+name: Daily Green Square Bot
+
+on:
+  schedule:
+    # Runs at 12:00 UTC every day. You can change this using crontab syntax.
+     - cron: '*/10 * * * *'
+  workflow_dispatch: # This allows you to run it manually from the Actions tab
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make a change to a file
+        run: |
+          echo "Last run: $(date)" >> daily_log.txt
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "YOUR GITHUB USERNAME"
+          git config --global user.email "YOUR GITHUB EMAIL ADDRESS"
+          git add daily_log.txt
+          git commit -m "Automated daily activity" || exit 0
+          git push
