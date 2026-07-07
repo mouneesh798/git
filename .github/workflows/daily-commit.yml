@@ -3,7 +3,7 @@ name: Daily Green Square Bot
 on:
   schedule:
     # Runs at 12:00 UTC every day. You can change this using crontab syntax.
-     - cron: '*/10 * * * *'
+     - cron: '0 */2 * * *'
   workflow_dispatch: # This allows you to run it manually from the Actions tab
 
 jobs:
